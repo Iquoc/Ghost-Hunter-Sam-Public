@@ -25,14 +25,22 @@ void Map::loadMap(std::string filePath, int sizeX, int sizeY)
 
 	int srcX, srcY;
 
+	rows = sizeY;
+	columns = sizeX;
+
 	for (int y = 0; y < sizeY; y++)		// for each row, iterate through all the columns
 	{
 		for (int x = 0; x < sizeX; x++)
 		{
 			mapFile.get(index);
 			srcY = atoi(&index) * tileSize;
+			//grid.emplace(/*true, true*/);		// walkable terrain
+			
 			mapFile.get(index);
 			srcX = atoi(&index) * tileSize;
+			//grid.emplace(true, true);		// walkable terrain
+			grid[x][y] = true;
+
 			addTile(srcX, srcY, x * scaleSize, y * scaleSize);
 			mapFile.ignore(std::numeric_limits<std::streamsize>::max(), ',');		// ignores the next character; which is a COMMA (,)
 		}
@@ -51,6 +59,8 @@ void Map::loadMap(std::string filePath, int sizeX, int sizeY)
 				auto& tCol(manager.addEntity());
 				tCol.addComponent<ColliderComponent>("terrain", x * scaleSize, y * scaleSize, scaleSize);
 				tCol.addGroup(Game::groupColliders);
+				//grid.emplace(true, false);		// collision/invisible wall/barrier/unwalkable terrain
+				grid[x][y] = false;
 			}
 			mapFile.ignore(std::numeric_limits<std::streamsize>::max(), ',');
 		}
@@ -65,6 +75,18 @@ void Map::addTile(int srcX, int srcY, int xPos, int yPos)
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(srcX, srcY, xPos, yPos, tileSize, mapScale, textureID);
 	tile.addGroup(Game::groupMap);
+}
+
+bool Map::getGrid(int row, int col)
+{
+	/*return grid[((row - 1) * columns) + col];*/
+	return grid[row, col ];
+}
+
+void Map::clearGrid()
+{
+	/*grid.clear();*/
+	memset(grid, 0, sizeof(grid[0][0]) * 10 * 10);
 }
 
 //void Map::drawMap()

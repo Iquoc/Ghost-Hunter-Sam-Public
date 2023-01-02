@@ -24,6 +24,8 @@ public:
 
 	bool running() { return isRunning; };
 
+	bool isCollision(int r, int c);
+
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
 

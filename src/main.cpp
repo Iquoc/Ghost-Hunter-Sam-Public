@@ -8,7 +8,7 @@ using namespace std;
 
 Game* game = nullptr;
 
-int count;
+int counter;
 
 int main(int argc, char* args[]) {
 	
@@ -32,10 +32,10 @@ int main(int argc, char* args[]) {
 	//}
 
 	const int FPS = 60; // frames per second
-	const int frameDelay = 1000 / FPS; // 16.667 seconds per frame
+	const int frameDelay = 1000 / FPS; // 16.667 seconds per frame; time in milliseconds
 
 	Uint32 frameStart;	// get number of milliseconds since SDL lib was initialized
-	int frameTime;	
+	int frameTime;	// number of time to execute a frame
 
 	game = new Game();
 	game->init("Ghost Hunter Sam", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);	// match 32 bit resolution

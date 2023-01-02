@@ -1,0 +1,69 @@
+﻿  AssetManager.cpp
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(62,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(65,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(69,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(25,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(26,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(42,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(43,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(60,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(64,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(68,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Collision.cpp
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(62,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(65,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(69,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(25,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(26,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(42,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(43,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(60,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(64,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(68,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ECS.cpp
+  Game.cpp
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(62,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(65,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(69,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(25,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(26,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(42,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(43,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(60,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(64,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(68,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\Game.cpp(276,66): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\Game.cpp(277,66): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  GameObject.cpp
+  main.cpp
+  Map.cpp
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TransformComponent.h(82,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(62,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(65,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(69,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\InputController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(25,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(26,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(42,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\TileComponent.h(43,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(60,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(64,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(68,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\Ghost Hunter Sam\src\ECS\AIController.h(72,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  TextureManager.cpp
+  Vector2D.cpp
+  Generating Code...
+  Ghost Hunter Sam.vcxproj -> P:\Users\Iquoc Tran\source\repos\Ghost Hunter Sam\x64\Demo\Ghost Hunter Sam.exe

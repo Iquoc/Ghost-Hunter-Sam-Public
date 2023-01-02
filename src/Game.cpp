@@ -92,13 +92,17 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 
 	// Entity Component Systems Implementation
 	player.addComponent<TransformComponent>(4);
+	player.getComponent<TransformComponent>().speed = 5;
 	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<InputController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 
 	enemy.addComponent<TransformComponent>(4);
+	enemy.getComponent<TransformComponent>().speed = 1;
 	enemy.addComponent<SpriteComponent>("enemy");
+	enemy.addComponent<AIController>();
+	enemy.addComponent<ColliderComponent>("enemy");
 	enemy.addGroup(groupEnemies);
 
 	SDL_Color white = { 255, 255, 255, 255 };
@@ -233,6 +237,8 @@ void Game::update() {
 	SDL_Rect playerCollider = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 	
+	SDL_Rect enemyCollider = enemy.getComponent<ColliderComponent>().collider;
+
 	std::stringstream ss;	// output string variable
 	ss << "Player Position: " << playerPos;
 	label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
@@ -245,8 +251,17 @@ void Game::update() {
 		SDL_Rect cCollider = c->getComponent<ColliderComponent>().collider;
 		if (Collision::AABB(cCollider, playerCollider))
 		{
-			player.getComponent<TransformComponent>().position = playerPos;
+			//player.getComponent<TransformComponent>().position = playerPos;
+			player.getComponent<InputController>().reset();
+			//player.getComponent<TransformComponent>().position = player.getComponent<InputController>().movePoint->getPreviousPosition();
 		}
+
+		if (Collision::AABB(cCollider, enemyCollider))
+		{
+			enemy.getComponent<AIController>().reset();
+		}
+
+
 	}
 
 	for (auto& p : projectiles) {
@@ -296,6 +311,11 @@ void Game::update() {
 //		t->getComponent<TileComponent>().destRect.y += -(pVelocity.y * pSpeed);
 //	}
 //}
+
+bool Game::isCollision(int r, int c)
+{
+	return map->getGrid(r, c);
+}
 
 void Game::handleEvents()
 {

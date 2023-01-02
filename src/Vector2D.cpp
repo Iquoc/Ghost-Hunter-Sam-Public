@@ -45,6 +45,15 @@ Vector2D& Vector2D::divide(const Vector2D& vector)	// divides a vector to the cu
 	return *this;
 }
 
+bool Vector2D::equals(const Vector2D& vector)
+{
+	if (this->x == vector.x && this->y == vector.y) {
+		return true;
+	}
+	return false;
+}
+
+
 Vector2D& operator+(Vector2D& v1, const Vector2D& v2)
 {
 	return v1.add(v2);
@@ -85,6 +94,11 @@ Vector2D& Vector2D::operator/=(const Vector2D& vector)
 	return this->divide(vector);
 }
 
+bool Vector2D::operator==(const Vector2D& vector)
+{
+	return this->equals(vector);
+}
+
 Vector2D& Vector2D::operator*(const int& i)
 {
 	this->x *= i;
@@ -97,6 +111,14 @@ Vector2D& Vector2D::zero()
 {
 	this->x = 0;
 	this->y = 0;
+
+	return *this;
+}
+
+Vector2D& Vector2D::binary()
+{
+	if (this->x != 0) { this->x = abs(this->x) / this->x; }
+	if (this->y != 0) { this->y = abs(this->y) / this->y; }
 
 	return *this;
 }

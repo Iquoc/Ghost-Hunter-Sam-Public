@@ -12,6 +12,8 @@ public:
 	Vector2D velocity;
 	int speed = 3;
 
+	Vector2D prevPos;
+
 	int height = 16;
 	int width = 16;
 	int scale = 1;
@@ -62,5 +64,21 @@ public:
 	{
 		position.x += velocity.x * speed;
 		position.y += velocity.y * speed;
+	}
+
+	int getScale()
+	{
+		return scale;
+	}
+
+	Vector2D getPreviousPosition()
+	{
+		return prevPos;
+	}
+
+	Vector2D moveToward(Vector2D destPos)
+	{
+		Vector2D direction = destPos - position;
+		return direction.binary() * Vector2D(speed, speed);
 	}
 };
