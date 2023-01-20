@@ -1,0 +1,13 @@
+Day 34; Created AIController Component 
+
++AIController
+
+// Major.Minor.Build.Revision
+v0.0.0.28
+============================================
+Day 52; Hot-fix
+
++buffer == NULL if inCloset // reset buffer if inside closet, fixed glitch where player was unable to leave because of buffer
+
+// Major.Minor.Build.Revision
+v0.0.0.42

@@ -15,8 +15,11 @@ private:
 	SDL_Rect srcRect, destRect;
 
 	bool animated = false;
+	int currentFrame = 0;
 	int frames = 0;
 	int speed = 100;
+
+	bool temp = false;
 
 public:
 
@@ -46,6 +49,21 @@ public:
 		setTexture(id);
 	}
 
+	SpriteComponent(std::string id, int spFrames, bool isAnimated)
+	{
+		animated = isAnimated;
+		frames = spFrames;
+
+		Animation idle = Animation(0, 4, 500);
+		Animation walk = Animation(1, 4, 100);
+
+		animations.emplace("Idle", idle);
+		animations.emplace("Walk", walk);
+
+		play("Idle");
+		setTexture(id);
+	}
+
 	~SpriteComponent()
 	{
 
@@ -63,23 +81,8 @@ public:
 		srcRect.w = transform->height;
 		srcRect.h = transform->height;
 
+		currentFrame = 1;
 	}
-	
-	// Update A; Static Camera
-	//void update() override
-	//{
-	//	if (animated) {
-	//		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-	//	}
-
-	//	srcRect.y = animIndex * transform->height;
-
-	//	destRect.x = static_cast<int>(transform->position.x);
-	//	destRect.y = static_cast<int>(transform->position.y);
-	//
-	//	destRect.w = transform->width * transform->scale;
-	//	destRect.h = transform->height * transform->scale;
-	//}
 
 	// Update B; Camera Follows Player
 	void update() override
@@ -107,5 +110,18 @@ public:
 		frames = animations[animName].frames;
 		speed = animations[animName].speed;
 		animIndex = animations[animName].index;
+	}
+
+	void alternate(int frame)
+	{
+		srcRect.x = 32 * (frame - 1);
+		//if (currentFrame % frames == 0) {
+		//	srcRect.x = 0;
+		//	currentFrame = 1;
+		//}
+		//else {
+		//	srcRect.x = srcRect.x + 32;
+		//	currentFrame = frame;
+		//}
 	}
 };

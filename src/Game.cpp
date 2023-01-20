@@ -29,6 +29,9 @@ SDL_Rect Game::camera = { 0,0,800, 640 };
 auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 
+// Interactable Objects
+auto& closet(manager.addEntity());
+
 // UI
 auto& label(manager.addEntity());
 
@@ -82,6 +85,9 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	assets->addTexture("enemy", "assets/enemy/ghost.png");
 	assets->addTexture("projectile", "assets/projectile/projectile_test.png");
 
+	assets->addTexture("closet", "assets/texture/closet_s.png");
+
+
 	assets->addFont("arial", "assets/font/arial.ttf", 16);
 
 	// Map Implementation
@@ -89,21 +95,29 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	map = new Map("terrain", 3, 32);
 
 	map->loadMap("assets/map/test1.map", 10, 10);
+	map->printGrid();
+	std::cout << map->getSpawn(0, 'c') << std::endl;
 
 	// Entity Component Systems Implementation
 	player.addComponent<TransformComponent>(4);
-	player.getComponent<TransformComponent>().speed = 5;
+	player.getComponent<TransformComponent>().speed = 3;
 	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<InputController>();
-	player.addComponent<ColliderComponent>("player");
+	player.addComponent<ColliderComponent>("player", true);
 	player.addGroup(groupPlayers);
 
 	enemy.addComponent<TransformComponent>(4);
 	enemy.getComponent<TransformComponent>().speed = 1;
 	enemy.addComponent<SpriteComponent>("enemy");
 	enemy.addComponent<AIController>();
-	enemy.addComponent<ColliderComponent>("enemy");
+	enemy.addComponent<ColliderComponent>("enemy", true);
 	enemy.addGroup(groupEnemies);
+
+	closet.addComponent<TransformComponent>(1 * 32 * 3, 2 * 32 * 3, 32, 32, 3);
+	closet.addComponent<SpriteComponent>("closet", 2, false);
+	TransformComponent closetTransform = closet.getComponent<TransformComponent>();
+	closet.addComponent<ColliderComponent>("closet", closetTransform.position.x, closetTransform.position.y, 4, true);
+	closet.addGroup(groupClosets);
 
 	SDL_Color white = { 255, 255, 255, 255 };
 	label.addComponent<UILabel>(10, 10, "Hello World!", "arial", white);
@@ -111,12 +125,6 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	assets->createProjectile(Vector2D(100, 300), Vector2D(2, 1), 200, 2, "projectile");
 	assets->createProjectile(Vector2D(100, 400), Vector2D(2, 0), 200, 2, "projectile");
 	assets->createProjectile(Vector2D(100, 500), Vector2D(2, -1), 200, 2, "projectile");
-
-
-	/*wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 2);
-	wall.addComponent<SpriteComponent>("assets/wall.png");
-	wall.addComponent<ColliderComponent>("wall");
-	wall.addGroup(groupMap);*/
 
 
 	//playerTex = TextureManager::LoadTexture("assets/sam.png", renderer);	// assigns player texture using TextureManager class
@@ -128,68 +136,11 @@ auto& players(manager.getGroup(Game::groupPlayers));
 auto& colliders(manager.getGroup(Game::groupColliders));
 auto& enemies(manager.getGroup(Game::groupEnemies));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
+auto& closets(manager.getGroup(Game::groupClosets));
 
 // Check TransformComponent
 //		 SpriteComponent::update()
 //		 TileComponent
-
-// Update A.2; Static Camera
-//void Game::update()
-//{
-//	manager.refresh();
-//	manager.update();
-//
-//	if (player.getComponent<TransformComponent>().position.x <= 800 / 4)
-//	{
-//		camera.x = 400 / 4;
-//		std::cout << "(" << camera.x << "," << camera.y << ")" << std::endl;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.x <= 800 / 4 * 2)
-//	{
-//		camera.x = 400 / 4 * 2;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.x <= 800 / 4 * 3)
-//	{
-//		camera.x = 400 / 4 * 3;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.x <= 800 / 4 * 4)	// possibly redundant
-//	{
-//		camera.x = 400 / 4 * 4;
-//	}
-//	if (player.getComponent<TransformComponent>().position.y <= 640 / 4)
-//	{
-//		camera.y = 320 / 8;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.y <= 640 / 4 * 2)
-//	{
-//		camera.y = 320 / 8 * 3;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.y <= 640 / 4 * 3)
-//	{
-//		camera.y = 320 / 8 * 5;
-//	}
-//	else if (player.getComponent<TransformComponent>().position.y <= 640 / 4 * 4)	// possibly redundant
-//	{
-//		camera.y = 320 / 8 * 7;
-//	}
-//
-//	if (camera.x < 0)
-//	{
-//		camera.x = 0;
-//	}
-//	else if (camera.x > camera.w)
-//	{
-//		camera.x = camera.w;
-//	}
-//	if (camera.y < 0)
-//	{
-//		camera.y = 0;
-//	}
-//	else if (camera.y > camera.w)
-//	{
-//		camera.y = camera.w;
-//	}
-//}
 
 //// Update A; Static Camera
 //void Game::update()
@@ -233,11 +184,14 @@ auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 // Update B.2; Camera Follows Player
 void Game::update() {
-
-	SDL_Rect playerCollider = player.getComponent<ColliderComponent>().collider;
+	//SDL_Rect playerCollider = player.getComponent<ColliderComponent>().collider;
+	Circle playerCollider = player.getComponent<ColliderComponent>().getCircle();
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
+	TransformComponent* playerMP = player.getComponent<InputController>().movePoint;
+	InputController* playerInput = &player.getComponent<InputController>();
 	
-	SDL_Rect enemyCollider = enemy.getComponent<ColliderComponent>().collider;
+	/*SDL_Rect enemyCollider = enemy.getComponent<ColliderComponent>().collider;*/
+	Circle enemyCollider = enemy.getComponent<ColliderComponent>().getCircle();
 
 	std::stringstream ss;	// output string variable
 	ss << "Player Position: " << playerPos;
@@ -246,13 +200,46 @@ void Game::update() {
 	manager.refresh();
 	manager.update();
 
+	for (auto& c : closets) {
+		Circle closetCollider = c->getComponent<ColliderComponent>().circle;
+		SpriteComponent* closetSprite = &closet.getComponent<SpriteComponent>();
+
+		if (Collision::AABB(closetCollider, playerCollider))
+		{
+			/*player.getComponent<InputController>().closetTimeSwitch();*/
+			playerInput->closetTime = true;
+			playerInput->path = closet.getComponent<TransformComponent>().getCenter();
+			//std::cout << playerInput->closetTime << std::endl;
+		
+			//closetSprite->setTexture("closet_open");
+			if (playerInput->inCloset) {
+				closetSprite->alternate(1);
+			}
+			else {
+				closetSprite->alternate(2);
+			}
+
+			if (c->getComponent<TransformComponent>().getCenter() == player.getComponent<TransformComponent>().position && playerInput->doPathing) {
+				playerInput->inCloset = true;
+			}
+		}
+		else
+		{
+			playerInput->inCloset = false;
+			playerInput->closetTime = false;
+			closetSprite->alternate(1);
+		}
+	}
+
 	for (auto& c : colliders)
 	{
 		SDL_Rect cCollider = c->getComponent<ColliderComponent>().collider;
 		if (Collision::AABB(cCollider, playerCollider))
 		{
 			//player.getComponent<TransformComponent>().position = playerPos;
-			player.getComponent<InputController>().reset();
+			if (!playerInput->inCloset && !playerInput->doPathing) {
+				player.getComponent<InputController>().reset();
+			}
 			//player.getComponent<TransformComponent>().position = player.getComponent<InputController>().movePoint->getPreviousPosition();
 		}
 
@@ -260,13 +247,16 @@ void Game::update() {
 		{
 			enemy.getComponent<AIController>().reset();
 		}
+	}
 
-
+	if (Collision::AABB(playerCollider, enemyCollider))
+	{
+		//std::cout << "Hit player!" << std::endl;
 	}
 
 	for (auto& p : projectiles) {
 		SDL_Rect projectileCollider = p->getComponent<ColliderComponent>().collider;
-		if (Collision::AABB(playerCollider, projectileCollider))
+		if (Collision::AABB(projectileCollider, playerCollider))
 		{
 			std::cout << "Hit player!" << std::endl;
 			p->destroy();
@@ -292,6 +282,34 @@ void Game::update() {
 	{
 		camera.y = camera.w;
 	}
+
+	//renderer = SDL_CreateRenderer(window, 1, 0);
+	//if (renderer)	// checks if renderer is created
+	//{
+	//	SDL_Texture* lights; /* blend mode as SDL_BLENDMODE_ADD, imported from a file or something*/
+
+	//	SDL_Texture* shadow; /* blend mode as SDL_BLENDMODE_MOD, should be created with SDL_CreateTexture with SDL_TEXTUREACCESS_TARGET */
+
+	//	SDL_Renderer* light_renderer = SDL_CreateRenderer(window, 1, 0);
+
+	//	/*rendering the shadow*/
+	//	SDL_Renderer* shadow_renderer = SDL_CreateRenderer(window, 1, 0);
+
+	//	SDL_SetRenderTarget(shadow_renderer, shadow);
+
+	//	SDL_SetRenderDrawColor(shadow_renderer, 0, 0, 0, 255);  /* put your desired tint , (the alpha value has no effect here) */
+
+	//	SDL_RenderFillRect(nullptr, nullptr); /* draw the color to the entire shadow*/
+
+	//	SDL_RenderCopy(light_renderer, lights, nullptr, nullptr); /* your spotlights */
+
+	//	SDL_SetRenderTarget(shadow_renderer, shadow); /* set the render back to your scene*/
+
+	//	SDL_RenderCopy(shadow_renderer, shadow, nullptr, nullptr); /* shadow */
+
+	//	SDL_RenderPresent(renderer); /* show everything */
+	//	std::cout << "Dark cast created!" << std::endl;
+	//}
 }
 
 // Update B; Camera Follows Player
@@ -324,7 +342,6 @@ void Game::handleEvents()
 		case SDL_QUIT:	// close out window sets program isRunning false
 			isRunning = false;
 			break;
-
 		default:
 			break;
 	}
@@ -339,7 +356,7 @@ void Game::render()
 		t->draw();
 	}
 
-	for (auto& c : colliders) {
+	for (auto& c : colliders) {	// draws collision
 		c->draw();
 	}
 
@@ -353,6 +370,10 @@ void Game::render()
 
 	for (auto& p : projectiles) {
 		p->draw();
+	}
+
+	for (auto& c : closets) {
+		c->draw();
 	}
 
 	label.draw();

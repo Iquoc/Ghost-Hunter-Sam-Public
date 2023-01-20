@@ -30,6 +30,7 @@ public:
 	Vector2D& operator*(const int& i);
 	Vector2D& zero();
 	Vector2D& binary();
+	float distance(Vector2D vectorA, Vector2D vectorB);
 
 	friend std::ostream& operator << (std::ostream& stream, const Vector2D vector);
 };

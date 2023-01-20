@@ -10,7 +10,7 @@ public:
 
 	Vector2D position;
 	Vector2D velocity;
-	int speed = 3;
+	int speed = 1;
 
 	Vector2D prevPos;
 
@@ -35,6 +35,13 @@ public:
 	{
 		position.x = 300;
 		position.y = 300;
+		scale = sc;
+	}
+
+	TransformComponent(float x, float y, int sc)
+	{
+		position.x = x;
+		position.y = y;
 		scale = sc;
 	}
 
@@ -71,6 +78,15 @@ public:
 		return scale;
 	}
 
+	Vector2D getCenter() 
+	{
+		int cX, cY;
+		cX = position.x + (width) / 2;
+		cY = position.y + (width) / 2;
+		Vector2D center = Vector2D(cX, cY);
+		return center;
+	}
+
 	Vector2D getPreviousPosition()
 	{
 		return prevPos;
@@ -79,6 +95,7 @@ public:
 	Vector2D moveToward(Vector2D destPos)
 	{
 		Vector2D direction = destPos - position;
-		return direction.binary() * Vector2D(speed, speed);
+		/*return direction.binary() * Vector2D(speed, speed);*/
+		return direction.binary();
 	}
 };

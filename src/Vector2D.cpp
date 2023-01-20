@@ -123,6 +123,17 @@ Vector2D& Vector2D::binary()
 	return *this;
 }
 
+float Vector2D::distance(Vector2D vectorA, Vector2D vectorB)
+{
+	Vector2D distanceVector = vectorA - vectorB;
+	//std::cout << distanceVector.x << "," << distanceVector.y << std::endl;
+	int dX = distanceVector.x;
+	int dY = distanceVector.y;
+	float distance = sqrt(dX * dX + dY * dY);
+
+	return distance;
+}
+
 std::ostream& operator << (std::ostream& stream, const Vector2D vector)
 {
 	stream << "(" << vector.x << "," << vector.y << ")";	// (x,y)

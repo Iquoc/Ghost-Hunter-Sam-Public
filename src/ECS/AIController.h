@@ -1,5 +1,7 @@
 #pragma once
 #include "Components.h"
+#include <time.h>
+#include <cstdlib>
 
 class AIController : public Component
 {
@@ -10,15 +12,19 @@ public:
 	TransformComponent* movePoint;
 	int distance;
 
+	int beg, end;
+
 	int action;
 	int avoidCase;		// temp AI
 
 	int counter;
 
-	AIController(){}
-	AIController(std::string id, int level)
-	{
+	int objectID;
 
+	AIController(){}
+	AIController(int id)
+	{
+		objectID = id;
 	}
 	~AIController()
 	{}
@@ -35,18 +41,25 @@ public:
 		distance = 32 * transform->getScale() * 3 / 4;
 		
 		counter = 0;
+
+
+		beg = 0;
+		end = 4;
 	}
 	
 	void update() override
 	{
 		counter++;
 
-		int beg = 0;
-		int end = 4;
+		//switch (objectID) {
+		//case 0:		// GHOST
+
+		//case 10:		// FURNITURE
+		//}
 
 		if (transform->position == movePoint->position) {
 			if (counter % 6 == 0) {
-				action = std::rand() % ((end - beg) + 1) + beg;
+				action = (std::rand()) % ((end - beg) + 1) + beg;
 
 				while (action == avoidCase) {
 					action = std::rand() % ((end - beg) + 1) + beg;

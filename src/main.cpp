@@ -39,6 +39,9 @@ int main(int argc, char* args[]) {
 
 	game = new Game();
 	game->init("Ghost Hunter Sam", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);	// match 32 bit resolution
+	// 25 x 20; 5:4
+
+	std::srand(std::time(0));	// gives the random function a new seed, using the time in seconds since the UNIX epoch
 
 	while (game->running()) {
 		

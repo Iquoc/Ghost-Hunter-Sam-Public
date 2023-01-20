@@ -5,6 +5,7 @@
 #include "ECS\ECS.h"
 #include "ECS\Components.h"
 #include "Game.h"
+#include "Vector2D.h"
 
 extern Manager manager;		// extern makes this the same variable as in Game.cpp
 
@@ -39,7 +40,7 @@ void Map::loadMap(std::string filePath, int sizeX, int sizeY)
 			mapFile.get(index);
 			srcX = atoi(&index) * tileSize;
 			//grid.emplace(true, true);		// walkable terrain
-			grid[x][y] = true;
+			grid[x][y] = 't';
 
 			addTile(srcX, srcY, x * scaleSize, y * scaleSize);
 			mapFile.ignore(std::numeric_limits<std::streamsize>::max(), ',');		// ignores the next character; which is a COMMA (,)
@@ -57,10 +58,11 @@ void Map::loadMap(std::string filePath, int sizeX, int sizeY)
 			if (index == '1')
 			{
 				auto& tCol(manager.addEntity());
-				tCol.addComponent<ColliderComponent>("terrain", x * scaleSize, y * scaleSize, scaleSize);
+				tCol.addComponent<ColliderComponent>("terrain", x * scaleSize, y * scaleSize, scaleSize, false);
 				tCol.addGroup(Game::groupColliders);
 				//grid.emplace(true, false);		// collision/invisible wall/barrier/unwalkable terrain
-				grid[x][y] = false;
+				grid[x][y] = 'c';
+				collisionMap.emplace(x, y);
 			}
 			mapFile.ignore(std::numeric_limits<std::streamsize>::max(), ',');
 		}
@@ -77,16 +79,57 @@ void Map::addTile(int srcX, int srcY, int xPos, int yPos)
 	tile.addGroup(Game::groupMap);
 }
 
-bool Map::getGrid(int row, int col)
+char Map::getGrid(int row, int col)
 {
 	/*return grid[((row - 1) * columns) + col];*/
-	return grid[row, col ];
+	return grid[row][col];
+}
+
+Vector2D Map::getSpawn(int adjacent, char type)
+{
+	//switch (type) {
+	//case 'c':
+	//	std::map<int, int>::iterator it;
+	//	for (it = collisionMap.begin(); it != collisionMap.end(); it++)
+	//	{
+	//		int x = it->first;
+	//		int y = it->second;
+
+	//		// checks if corner
+	//		bool up = collisionMap.contains(x+1, y);
+	//		bool down;
+	//		bool left;
+	//		bool right;
+
+	//	}
+	//	break;
+	//}
+	std::map<int, int>::iterator it;
+	for (it = collisionMap.begin(); it != collisionMap.end(); it++)
+	{
+		return Vector2D(it->first * 32 * 4, it->second * 32 * 4);
+	}
 }
 
 void Map::clearGrid()
 {
 	/*grid.clear();*/
 	memset(grid, 0, sizeof(grid[0][0]) * 10 * 10);
+}
+
+void Map::printGrid()
+{
+	int rows = sizeof(grid) / sizeof(grid[0]);
+	int columns = sizeof(grid[0]) / sizeof(grid[0][0]);
+
+	for (int col = 0; col < columns; col++)
+	{
+		for (int row = 0; row < rows; row++)
+		{
+			std::cout << grid[row][col] << ", ";
+		}
+		std::cout << std::endl;
+	}
 }
 
 //void Map::drawMap()
