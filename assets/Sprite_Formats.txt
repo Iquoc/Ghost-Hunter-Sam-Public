@@ -1,0 +1,13 @@
+Player: 16x16 => 32x32
+
+Ghost: 16x16 => 32z32
+
+Furniture: 32x32
+	Closet = 30 pixels x 22
+	Nightstand/table = 15 pixels x 22
+
+Tiles: 32x32
+
+Resolution: 800x640
+
+	Nightstand Background: 200x160
